@@ -1,5 +1,3 @@
-import NavBar from "../components/Nav";
-import { Icon } from "@iconify/react";
 import img from "../assets/images/opt-bg.png";
 import { Link } from "react-router-dom";
 
