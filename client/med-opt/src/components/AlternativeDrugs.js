@@ -9,8 +9,8 @@ const AlternativeDrugs = () => {
             </p>
           </div>
           <div className="md:w-3/4 md:ml-4">
-            <h3 className="text-xl font-semibold mb-2">Name: Power Thirst</h3>           
-            <p className="text-gray-600">
+            <h3 className="text-xl font-semibold mb-2">Product Name: Power Thirst</h3>           
+            <p className="text-gray-600 mb-2">
               {" "}
               <b>Brand:</b>
               Cras nisi dolor, tristique id vehicula vitae
