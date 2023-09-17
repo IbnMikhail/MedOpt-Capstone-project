@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS drugs (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  brand VARCHAR(255),
+  price VARCHAR(255),
+  description VARCHAR(255),
+  ingredients VARCHAR(255),
+  created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+  updated_at TIMESTAMP DEFAULT NOW() NOT NULL
+);
