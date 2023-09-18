@@ -1,84 +1,77 @@
 import express from "express";
-// const express = require("express");
 import sql from "./db.js";
-import cors from "cors"
+import cors from "cors";
 
 const app = express();
 
+app.use(cors());
 app.get("/", (req, res) => {
-    res.send("Hello")
-})
+  res.send("Hello");
+});
 
-app.use(
-    cors({
-      origin: ["http://localhost:5173"],
-    })
-  );
+app.use(express.json());
 
-app.use(express.json())
+app.get("/api/drugs", async (req, res) => {
+  const drugs = await sql`SELECT * FROM drugs`;
+  if (drugs) {
+    res.status(200).send(drugs);
+  } else {
+    res.status(500).send("Error getting drugs");
+  }
+});
 
-app.get("/api/todos", async (req, res) => {
-    const todos = await sql`SELECT * FROM todos`
-    console.log(todos)
-    if (todos){
-        res.status(200).send(todos)
-    } else {
-        res.status(404).send("Errorrrrrrr. Leave the planet")       
-    }
-})
+app.post("/api/drugs", async (req, res) => {
+  const { name, brand, price, description, ingredients } = req.body;
+  const drugs =
+    await sql`INSERT INTO drugs (task, is_completed) VALUES (${name}, ${brand}, ${price}, ${description}, ${ingredients}) RETURNING *`;
+  if (drugs) {
+    res.status(200).send(drugs);
+  } else {
+    res.status(500).send("Internal server Error");
+  }
+});
 
-app.post("/api/todos2", async (req, res) => {
-    const { task, is_completed } = req.body
-    const todos2 = await sql `INSERT INTO todos (task, is_completed) VALUES (${task}, ${is_completed}) RETURNING *`
-    // console.log(todos2)
-    if (todos2){
-        res.status(201).send(todos2)
-    } else {
-        res.status(500).send("Internal server Error")
-    }
-})
-
-app.put("/api/todos2/:id", async (req, res) => {
+app.put("/api/drugs/:id", async (req, res) => {
   const { id } = req.params;
-  const { task, is_completed } = req.body;
+  const { name, brand, price, description, ingredients } = req.body;
 
   try {
-    const updatedTodo = await sql`
-      UPDATE todos
-      SET task = ${task}, is_completed = ${is_completed}
+    const updateDrug = await sql`
+      UPDATE drugs
+      SET name = ${name}, brand = ${brand}, price = ${price}, description = ${description}, ingredients = ${ingredients}
       WHERE id = ${id}
       RETURNING *
     `;
 
-    if (updatedTodo && updatedTodo.length > 0) {
-      res.status(200).json(updatedTodo[0]);
+    if (updateDrug && updateDrug.length > 0) {
+      res.status(200).json(updateDrug[0]);
     } else {
-      res.status(404).send("Todo not found");
+      res.status(404).send("Drug not found");
     }
   } catch (error) {
-    console.error("Error updating todo:", error);
+    console.error("Error updating drug:", error);
     res.status(500).send("Internal server error");
   }
 });
 
+app.delete("/api/drugs/:id", async (req, res) => {
+  const { id } = req.params;
 
-app.delete("/api/todos2/:id", async (req, res) => {
-    const { id } = req.params;
-  
-    try {
-      const deletedTodo = await sql`DELETE FROM todos WHERE id = ${id} RETURNING *`;
-      
-      if (deletedTodo && deletedTodo.length > 0) {
-        res.status(200).json(deletedTodo[0]);
-      } else {
-        res.status(404).send("Todo not found");
-      }
-    } catch (error) {
-      console.error("Error deleting todo:", error);
-      res.status(500).send("Internal server error");
+  try {
+    const deleteDrug =
+      await sql`DELETE FROM drugs WHERE id = ${id} RETURNING *`;
+
+    if (deleteDrug && deleteDrug.length > 0) {
+      res.status(200).json(deleteDrug[0]);
+    } else {
+      res.status(404).send("Drug not found");
     }
-  });
-  
+  } catch (error) {
+    console.error("Error deleting drug:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 app.listen(8000, () => {
-    console.log("Server is running on port 8000")
+  console.log("Server is running on port 8000");
 });
