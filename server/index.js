@@ -5,11 +5,12 @@ import cors from "cors";
 const app = express();
 
 app.use(cors());
+
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello");
 });
-
-app.use(express.json());
 
 app.get("/api/drugs", async (req, res) => {
   const drugs = await sql`SELECT * FROM drugs`;
