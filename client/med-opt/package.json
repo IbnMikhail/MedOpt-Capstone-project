@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -38,7 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {    
+  "devDependencies": {
     "tailwindcss": "^3.3.3"
   }
 }
