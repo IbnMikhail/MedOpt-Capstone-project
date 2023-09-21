@@ -10,7 +10,7 @@ function Home() {
         <NavBar />
         <div className="bg-white h-100 p-8">
           <div className="text-center lg:p-20">
-            <div className="text-9xl pb-8 font-bold">
+            <div className="text-5xl lg:text-9xl pb-8 font-bold">
               <span className="text-#43ce3f bold">Med</span>
               <span className="text-#3636a4 bold">Opt</span>
             </div>
