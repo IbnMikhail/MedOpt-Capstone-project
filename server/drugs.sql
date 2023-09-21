@@ -1,11 +1,10 @@
 CREATE TABLE IF NOT EXISTS drugs (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255),
+  drugName VARCHAR(255) UNIQUE NOT NULL,
   brand VARCHAR(255),
-  price VARCHAR(255),
-  description VARCHAR(255),
-  ingredients VARCHAR(255),
+  price DECIMAL(10, 2), 
+  description TEXT,
+  ingredients JSONB,
   created_at TIMESTAMP DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMP DEFAULT NOW() NOT NULL
 );
-
