@@ -1,34 +1,8 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Navigate,
 } from "react-router-dom";
 import "./assets/css/style.css";
 import Home from "./pages/Home";
@@ -38,16 +12,28 @@ import SignUp from "./pages/Sign";
 import DisplayPage from "./pages/Search";
 
 function App() {
+  const UploadRouteGuard = ({ element }) => {
+    if (
+      !localStorage.getItem("medOpt") ||
+      localStorage.getItem("medOpt") === 'undefined'
+    ) {
+      return <Navigate to="/" />;
+    }
+    return element;
+  };
   return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/search" element={<DisplayPage />} />
-        </Routes>
-      </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/search"
+          element={<UploadRouteGuard element={<DisplayPage />} />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
