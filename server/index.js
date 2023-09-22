@@ -13,6 +13,9 @@ const connectionOptions = {
 const db = pgp(connectionOptions);
 const app = express();
 
+// import crypto from "crypto";
+// const jwtSecret = crypto.randomBytes(32).toString('base64');
+
 app.use(cors());
 
 app.use(express.json());

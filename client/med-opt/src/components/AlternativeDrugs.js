@@ -12,16 +12,16 @@ const AlternativeDrugs = ({price,name,brand,description,ingredients}) => {
             <h3 className="text-xl font-semibold mb-2">Product Name: {name}</h3>           
             <p className="text-gray-600 mb-2">
               {" "}
-              <b>Brand:</b>
+              <b>Brand: </b>
               {brand}
             </p>
             <p className="text-gray-600">
               {" "}
-              <b>Active Ingredients:</b>
+              <b>Active Ingredients: </b>
               {ingredients}
             </p>
             <p className="text-gray-600">
-              <b>Description:</b>
+              <b>Description: </b>
               {description}
             </p>
           </div>

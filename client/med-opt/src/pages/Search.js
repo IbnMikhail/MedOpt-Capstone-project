@@ -2,8 +2,9 @@ import SearchBar from "../components/SearchBar";
 import AlternativeDrugs from "../components/AlternativeDrugs";
 import Footer from "../components/Footer";
 import NavBar from "../components/Nav";
-import { useState, CSSProperties } from "react";
+import { useState } from "react";
 import FadeLoader from "react-spinners/FadeLoader";
+import img from "../assets/images/docc.gif";
 
 const DisplayPage = () => {
   let [msg, setMsg] = useState("");
@@ -38,8 +39,12 @@ const DisplayPage = () => {
 
       if (response.status === 200) {
         let res = await response.json();
-        if (res.results?.length > 0) {
+        console.log(res, "response");
+        if (res?.results?.length > 0) {
           setMsg("Results Found!");
+          setResults(res.results);
+        } else {
+          setMsg("No Matching Drug Found!");
           setResults(res.results);
         }
         const t1 = setTimeout(() => {
@@ -74,24 +79,31 @@ const DisplayPage = () => {
         <div className="w-full py-4">
           <SearchBar
             click={(searchTerm) => handleSearchClick(searchTerm)}
-            btn={loading ? <FadeLoader height='10px' color="green" /> : "Search"}
+            btn={
+              loading ? <FadeLoader height="10px" color="green" /> : "Search"
+            }
           />
 
           <p className="py-5 font-bold text-xl text-center text-#43ce3f capitalize">
             {msg}
           </p>
           <div className="bg-white border rounded-lg shadow p-4">
-            {results?.map((e, i) => {
-              return (
+            {results.length > 0 ? (
+              results.map((e, i) => (
                 <AlternativeDrugs
+                  key={i} // Assuming you have a unique key for each item
                   name={e.name}
                   price={e.price.toLocaleString()}
                   description={e.description}
                   brand={e.brand}
                   ingredients={e.ingredients.join(", ")}
                 />
-              );
-            })}
+              ))
+            ) : (
+              <div className="flex justify-center">
+                <img src={img} alt="Welcome" />
+              </div>
+            )}
           </div>
         </div>
       </div>
