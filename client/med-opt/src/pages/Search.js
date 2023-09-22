@@ -92,7 +92,7 @@ const DisplayPage = () => {
               results.map((e, i) => (
                 <AlternativeDrugs
                   key={i} // Assuming you have a unique key for each item
-                  name={e.name}
+                  name={e.drugname}
                   price={e.price.toLocaleString()}
                   description={e.description}
                   brand={e.brand}
