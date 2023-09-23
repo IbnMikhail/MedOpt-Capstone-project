@@ -88,7 +88,7 @@ const DisplayPage = () => {
             {msg}
           </p>
           <div className="bg-white border rounded-lg shadow p-4">
-            {results.drug ? (
+            {results?.drug ? (
               <>
                 {" "}
                 <h3 className="text-xl font-semibold mb-2">Drug Details:</h3>

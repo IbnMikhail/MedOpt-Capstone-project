@@ -8,45 +8,44 @@ function Profile() {
   const [history, setHistory] = useState([]);
   let id = localStorage.getItem("medOpt");
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/user/${id}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    const fetchUserHistory = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/history/${id}`);
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        let array = [];
+        let arr = [];
+        const data = await response.json();
+        data.forEach((e) => {
+          if (e.search && !arr.includes(e.search)) {
+            arr.push(e.search);
+            array.push(e);
+          }
+          return array;
+        });
+        setHistory(array);
+      } catch (error) {
+        console.error("Error fetching user history:", error);
+      }
+    };
     fetchData();
     fetchUserHistory();
-  });
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/user/${id}`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const userData = await response.json();
-      setUser(userData);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
-  const fetchUserHistory = async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/history/${id}`);
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      let array = [];
-      let arr = [];
-      const data = await response.json();
-      data.forEach((e) => {
-        if (e.search && !arr.includes(e.search)) {
-          arr.push(e.search);
-          array.push(e);
-        }
-        return array;
-      });
-      setHistory(array);
-    } catch (error) {
-      console.error("Error fetching user history:", error);
-    }
-  };
+  }, [id]);
 
   return (
     <>
