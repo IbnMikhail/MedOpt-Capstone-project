@@ -201,6 +201,27 @@ app.delete("/api/user/:id", async (req, res) => {
   }
 });
 
+app.get("/api/user/:id", async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const user = await sql`
+        SELECT * FROM users
+        WHERE id = ${id}
+      `;
+  
+      if (!user || user.length === 0) {
+        res.status(404).json({ error: "User not found" });
+      } else {
+        res.status(200).json(user[0]);
+      }
+    } catch (error) {
+      console.error("Error getting user:", error);
+      res.status(500).send("Internal server error");
+    }
+  });
+  
+
 app.post("/api/history", async (req, res) => {
   const { search, user_id } = req.body;
   try {
@@ -243,6 +264,26 @@ app.post("/api/history", async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
+
+app.get("/api/history/:user_id", async (req, res) => {
+    const { user_id } = req.params;
+  
+    try {
+      const history = await db.any(
+        `
+          SELECT * FROM history
+          WHERE user_id = $1
+        `,
+        [user_id]
+      );
+  
+      res.status(200).json(history);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Internal server error");
+    }
+  });
+  
 
 app.listen(8000, () => {
   console.log("Server is running on port 8000");

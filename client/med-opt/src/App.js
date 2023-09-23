@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import SignUp from "./pages/Sign";
 import DisplayPage from "./pages/Search";
+import Profile from "./pages/Profile";
 
 function App() {
   const UploadRouteGuard = ({ element }) => {
@@ -31,6 +32,10 @@ function App() {
         <Route
           path="/search"
           element={<UploadRouteGuard element={<DisplayPage />} />}
+        />
+          <Route
+          path="/profile"
+          element={<UploadRouteGuard element={<Profile />} />}
         />
       </Routes>
     </Router>

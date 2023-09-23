@@ -27,11 +27,12 @@ function NavBar() {
           </Link>
         </div>
 
-        <div className="text-white flex justify-between w-8/12 lg:w-3/12 m-5">
+        <div className="text-white flex justify-between w-8/12 lg:w-5/12 m-5">
           <NavLink link="About" to="/about" />
           {online ? (
             <>
               <NavLink link="Search" to="/search" />
+              <NavLink link="Profile" to="/profile" />
               <button className="hover:text-black font-extrabold">
                 Logout
               </button>
