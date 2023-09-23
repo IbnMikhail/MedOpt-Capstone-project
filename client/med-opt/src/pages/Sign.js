@@ -83,7 +83,7 @@ function SignUp() {
             <Link to="/">
               <img className="h-32" src={img} alt="logo" />
             </Link>
-            <p>{msg}</p>
+            <p className="text-red-600 mb-3">{msg}</p>
             <input
               type="text"
               placeholder="First Name"

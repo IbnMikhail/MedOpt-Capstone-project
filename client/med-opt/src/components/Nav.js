@@ -1,10 +1,11 @@
 import logo from "../assets/images/opt-bg.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavLink from "./NavLink";
 import { useEffect, useState } from "react";
 
 function NavBar() {
   let [online, setOnline] = useState(false);
+  let navigate = useNavigate();
   useEffect(() => {
     checkStatus();
   }, [online]);
@@ -18,6 +19,31 @@ function NavBar() {
       setOnline(false);
     }
   };
+  const logoutUser = async () => {
+    const shouldLogout = window.confirm("Are you sure you want to logout?");
+    if(shouldLogout) {
+    const apiUrl = "http://localhost:8000/api/logout";
+    let userId = localStorage.getItem("medOpt");
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    await response.json();
+      localStorage.removeItem("medOpt");
+      navigate("/");
+      // console.log("Logout successful:", data.message);
+    } catch (error) {
+      console.error("Error during logout:", error.message);
+    }}
+  };
+
   return (
     <>
       <div className="flex bg-#43ce3f shadow-xl shadow-black-900 justify-between items-center">
@@ -33,7 +59,10 @@ function NavBar() {
             <>
               <NavLink link="Search" to="/search" />
               <NavLink link="Profile" to="/profile" />
-              <button className="hover:text-black font-extrabold">
+              <button
+                className="hover:text-black font-extrabold"
+                onClick={() => logoutUser()}
+              >
                 Logout
               </button>
             </>

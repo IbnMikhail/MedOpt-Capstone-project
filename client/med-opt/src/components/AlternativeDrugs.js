@@ -9,7 +9,7 @@ const AlternativeDrugs = ({
   return (
     <div>
       <div className="mb-4">
-        <a href="#" className="block md:flex md:items-center">
+        <span className="block md:flex md:items-center">
           <div className="md:w-1/4">
             <p
               className="w-full h-[8rem] flex justify-center items-center text-3xl font-bold" 
@@ -35,7 +35,7 @@ const AlternativeDrugs = ({
               {description}
             </p>
           </div>
-        </a>
+        </span>
       </div>
     </div>
   );

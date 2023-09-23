@@ -1,5 +1,4 @@
 import NavBar from "../components/Nav";
-import img from "../assets/images/med.avif";
 import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 import AlternativeDrugs from "../components/AlternativeDrugs";
@@ -11,7 +10,7 @@ function Profile() {
   useEffect(() => {
     fetchData();
     fetchUserHistory();
-  }, []);
+  });
 
   const fetchData = async () => {
     try {

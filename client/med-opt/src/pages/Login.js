@@ -1,13 +1,13 @@
 import { useState } from "react";
 import img from "../assets/images/opt-bg.png";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [msg, setMsg] = useState("");
   let [loading, setLoading] = useState(false);
-  let navigate=useNavigate();
+  let navigate = useNavigate();
 
   let login = async () => {
     setLoading(true);
@@ -74,7 +74,7 @@ function Login() {
             <Link to="/">
               <img className="h-32" src={img} alt="logo" />
             </Link>
-            <p>{msg}</p>
+            <p className="text-red-600 mb-3">{msg}</p>
             <input
               type="email"
               placeholder="Email"
