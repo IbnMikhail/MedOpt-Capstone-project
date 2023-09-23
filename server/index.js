@@ -100,19 +100,36 @@ app.get("/api/users", async (req, res) => {
 // API to create a new user
 app.post("/api/user", async (req, res) => {
   const { firstname, lastname, email, password, med_history } = req.body;
+  if (!password || !firstname || !lastname || !email || !med_history) {
+    return res.status(400).json({
+      error: `Please fill missing required fields`,
+    });
+  }
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
   try {
     const existingUser = await sql`
-        SELECT * FROM users WHERE email = ${email}
-      `;
+          SELECT * FROM users WHERE email = ${email}
+        `;
+
     if (existingUser && existingUser.length > 0) {
       return res.status(409).json({ error: "Email is already in use" });
     }
+
+    if (!password.match(passwordRegex)) {
+      return res.status(400).json({
+        error: `Password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.`,
+      });
+    }
+
     const passwordHash = await bcrypt.hash(password, 12);
     const newUser = await sql`
-        INSERT INTO users (firstname, lastname, email, password, med_history)
-        VALUES (${firstname}, ${lastname}, ${email}, ${passwordHash}, ${med_history})
-        RETURNING *
-      `;
+          INSERT INTO users (firstname, lastname, email, password, med_history)
+          VALUES (${firstname}, ${lastname}, ${email}, ${passwordHash}, ${med_history})
+          RETURNING *
+        `;
+
     res.status(201).json(newUser[0]);
   } catch (error) {
     //   console.error("Error creating user:", error);
@@ -202,25 +219,24 @@ app.delete("/api/user/:id", async (req, res) => {
 });
 
 app.get("/api/user/:id", async (req, res) => {
-    const { id } = req.params;
-  
-    try {
-      const user = await sql`
+  const { id } = req.params;
+
+  try {
+    const user = await sql`
         SELECT * FROM users
         WHERE id = ${id}
       `;
-  
-      if (!user || user.length === 0) {
-        res.status(404).json({ error: "User not found" });
-      } else {
-        res.status(200).json(user[0]);
-      }
-    } catch (error) {
-      console.error("Error getting user:", error);
-      res.status(500).send("Internal server error");
+
+    if (!user || user.length === 0) {
+      res.status(404).json({ error: "User not found" });
+    } else {
+      res.status(200).json(user[0]);
     }
-  });
-  
+  } catch (error) {
+    console.error("Error getting user:", error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 app.post("/api/history", async (req, res) => {
   const { search, user_id } = req.body;
@@ -266,24 +282,23 @@ app.post("/api/history", async (req, res) => {
 });
 
 app.get("/api/history/:user_id", async (req, res) => {
-    const { user_id } = req.params;
-  
-    try {
-      const history = await db.any(
-        `
+  const { user_id } = req.params;
+
+  try {
+    const history = await db.any(
+      `
           SELECT * FROM history
           WHERE user_id = $1
         `,
-        [user_id]
-      );
-  
-      res.status(200).json(history);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("Internal server error");
-    }
-  });
-  
+      [user_id]
+    );
+
+    res.status(200).json(history);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal server error");
+  }
+});
 
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
