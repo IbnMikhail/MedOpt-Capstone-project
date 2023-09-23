@@ -206,7 +206,7 @@ app.post("/api/history", async (req, res) => {
   try {
     const drug = await db.oneOrNone(
       `
-          SELECT id, drugName, ingredients
+          SELECT id, drugName, ingredients, brand, description, price
           FROM drugs
           WHERE drugName = $1
         `,
@@ -219,25 +219,25 @@ app.post("/api/history", async (req, res) => {
     const drugIngredients = drug.ingredients;
 
     const results = await db.any(
-        `
+      `
           SELECT *
           FROM drugs
           WHERE id <> $1 AND ingredients @> $2::jsonb
           ORDER BY price ASC
         `,
-        [drug_id, JSON.stringify(drugIngredients)]
-      );
+      [drug_id, JSON.stringify(drugIngredients)]
+    );
 
-      await sql`INSERT INTO history (drug_id, user_id, search, results) VALUES 
+    await sql`INSERT INTO history (drug_id, user_id, search, results) VALUES 
       (${drug_id}, ${user_id}, ${search}, ${results}) RETURNING *`;
-    
+
     const history = {
       drug_id,
       user_id,
       search,
       results,
     };
-    res.status(200).json(history);
+    res.status(200).json({ drug, history });
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal server error");

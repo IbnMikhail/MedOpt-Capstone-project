@@ -39,10 +39,10 @@ const DisplayPage = () => {
 
       if (response.status === 200) {
         let res = await response.json();
-        console.log(res, "response");
-        if (res?.results?.length > 0) {
+        // console.log(res, "response");
+        if (res?.history?.results?.length > 0) {
           setMsg("Results Found!");
-          setResults(res.results);
+          setResults(res);
         } else {
           setMsg("No Matching Drug Found!");
           setResults(res.results);
@@ -88,17 +88,38 @@ const DisplayPage = () => {
             {msg}
           </p>
           <div className="bg-white border rounded-lg shadow p-4">
-            {results.length > 0 ? (
-              results.map((e, i) => (
+            {results.drug ? (
+              <>
+                {" "}
+                <h3 className="text-xl font-semibold mb-2">Drug Details:</h3>
                 <AlternativeDrugs
-                  key={i} // Assuming you have a unique key for each item
-                  name={e.drugname}
-                  price={e.price.toLocaleString()}
-                  description={e.description}
-                  brand={e.brand}
-                  ingredients={e.ingredients.join(", ")}
+                  name={results.drug?.drugname}
+                  price={results.drug?.price.toLocaleString()}
+                  description={results.drug?.description}
+                  brand={results.drug?.brand}
+                  ingredients={results.drug?.ingredients.join(", ")}
+                  bg={"bgDrug"}
                 />
-              ))
+              </>
+            ) : (
+              <></>
+            )}
+
+            {results?.history?.results?.length > 0 ? (
+              <>
+                <h3 className="text-xl font-semibold mb-2">Recommendations:</h3>
+                {results?.history?.results.map((e, i) => (
+                  <AlternativeDrugs
+                    key={i} // Assuming you have a unique key for each item
+                    name={e.drugname}
+                    price={e.price.toLocaleString()}
+                    description={e.description}
+                    brand={e.brand}
+                    ingredients={e.ingredients.join(", ")}
+                    bg={"bgRes"}
+                  />
+                ))}
+              </>
             ) : (
               <div className="flex justify-center">
                 <img src={img} alt="Welcome" />
