@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/Sign";
 import DisplayPage from "./pages/Search";
 import Profile from "./pages/Profile";
+import AddDrug from "./pages/AddDrug";
 
 function App() {
   const UploadRouteGuard = ({ element }) => {
@@ -29,6 +30,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route
+          path="/add"
+          element={<UploadRouteGuard element={<AddDrug />} />}
+        /> 
+        <Route path="/add" element={<AddDrug />} />
         <Route
           path="/search"
           element={<UploadRouteGuard element={<DisplayPage />} />}
