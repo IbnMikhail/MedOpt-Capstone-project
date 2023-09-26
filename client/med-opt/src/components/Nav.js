@@ -5,10 +5,13 @@ import { useEffect, useState } from "react";
 
 function NavBar() {
   let [online, setOnline] = useState(false);
+  let [adminStatus, setAdminStatus] = useState(false);
   let navigate = useNavigate();
   useEffect(() => {
     checkStatus();
+    admin();
   }, [online]);
+
   let checkStatus = () => {
     if (
       localStorage.getItem("medOpt") &&
@@ -17,6 +20,14 @@ function NavBar() {
       setOnline(true);
     } else {
       setOnline(false);
+    }
+  };
+
+  let admin = () => {
+    if (localStorage.getItem("medOpt") === "1") {
+      setAdminStatus(true);
+    } else {
+      setAdminStatus(false);
     }
   };
   const logoutUser = async () => {
@@ -59,6 +70,9 @@ function NavBar() {
             <>
               <NavLink link="Search" to="/search" />
               <NavLink link="Profile" to="/profile" />
+              {
+                adminStatus? <NavLink link="Admin" to="/add" />: <div style={{display:"none"}}></div>
+              }
               <button
                 className="hover:text-black font-extrabold"
                 onClick={() => logoutUser()}
