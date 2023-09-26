@@ -7,7 +7,7 @@ function About() {
     <>
       <div className="p-2">
         <NavBar/>
-        <div className="bg-white h-100 p-8 mb-11">
+        <div className="bg-blue-300 h-100 p-8 mb-11">
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
             <div className="w-full lg:w-1/2 text-center font-bold text-lg md:text-3xl leading-10">
               <p>

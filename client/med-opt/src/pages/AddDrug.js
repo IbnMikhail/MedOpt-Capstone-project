@@ -33,3 +33,4 @@ const AddDrug = () => {
 }
 
 export default AddDrug
+ 

@@ -72,7 +72,7 @@ const DisplayPage = () => {
   };
 
   return (
-    <div className="p-2">
+    <div className="p-2 bg-blue-300">
       <NavBar />
       <div className="container mx-auto">
         <hr />

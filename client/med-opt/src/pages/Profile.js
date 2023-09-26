@@ -49,7 +49,7 @@ function Profile() {
 
   return (
     <>
-      <div className="p-2 w-full">
+      <div className="p-2 w-full bg-blue-300">
         <NavBar />
         <div className="bg-white h-100 p-8 mb-11">
           <div className="container">

@@ -69,7 +69,7 @@ function Login() {
   return (
     <>
       <div>
-        <div className="bg-white">
+        <div className="bg-blue-300">
           <div className="flex flex-col items-center justify-center h-screen">
             <Link to="/">
               <img className="h-32" src={img} alt="logo" />

@@ -2,7 +2,7 @@
 
 const Features = () => {
   return (
-    <div style={{background:"whitesmoke"}}>
+    <div style={{background:"lightblue"}}>
       {/* Features Section */}
       <section className="py-16">
         <div className="container mx-auto text-center">
