@@ -15,14 +15,14 @@ const AddDrug = () => {
           </label>
           <input
             type="text"
-            id="drug_name"
+            id="drug_id"
             name="drug_name"
             required
             className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300 my-5"
           />
 
           <label for="Brand" className="block font-bold text-gray-700">
-            Manufacturer:
+            Brand:
           </label>
           <input
             type="text"
@@ -38,7 +38,6 @@ const AddDrug = () => {
             type="number"
             id="price"
             name="price"
-            step="0.01"
             required
             className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300 my-5"
           />
