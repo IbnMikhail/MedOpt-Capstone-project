@@ -83,6 +83,7 @@ function SignUp() {
             <Link to="/">
               <img className="h-32" src={img} alt="logo" />
             </Link>
+            <h1 className="font-bold text-2xl ">SIGN UP</h1>
             <p className="text-red-600 mb-3">{msg}</p>
             <input
               type="text"
@@ -91,7 +92,7 @@ function SignUp() {
               value={firstname}
               onChange={(e) => setFirstName(e.target.value)}
             />
-            <br /> <br />
+            <br /> 
             <input
               type="text"
               placeholder="Last Name"
@@ -99,7 +100,7 @@ function SignUp() {
               value={lastname}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <br /> <br />
+            <br /> 
             <input
               type="email"
               placeholder="Email"
@@ -107,7 +108,7 @@ function SignUp() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <br /> <br />
+            <br /> 
             <input
               type="password"
               placeholder="Password"
@@ -115,7 +116,7 @@ function SignUp() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <br /> <br />
+            <br /> 
             <input
               type="text"
               placeholder="Short Medical History"
@@ -123,7 +124,7 @@ function SignUp() {
               value={med_history}
               onChange={(e) => setMedHistory(e.target.value)}
             />
-            <br /> <br />
+            <br /> 
             <button className="w-80 lg:w-1/4 border-2 rounded-3xl p-3 bg-#43ce3f text-white"  onClick={() => register()}>
             {loading ? "Loading ..." : "Sign Up"}
             </button>

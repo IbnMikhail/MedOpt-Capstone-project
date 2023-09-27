@@ -74,6 +74,7 @@ function Login() {
             <Link to="/">
               <img className="h-32" src={img} alt="logo" />
             </Link>
+            <h1 className="font-bold text-3xl ">LOGIN</h1>
             <p className="text-red-600 mb-3">{msg}</p>
             <input
               type="email"
