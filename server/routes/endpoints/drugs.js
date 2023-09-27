@@ -38,18 +38,6 @@ let routes = (app) => {
     }
   });
 
-  // app.post("/api/drug", async (req, res) => {
-  //   const { drugName, brand, price, description, ingredients } = req.body;
-  //   const drugs =
-  //     await sql`INSERT INTO drugs (drugName, brand, price, description, ingredients) VALUES
-  //         (${drugName}, ${brand}, ${price}, ${description}, ${ingredients}) RETURNING *`;
-  //   if (drugs) {
-  //     res.status(200).send(drugs);
-  //   } else {
-  //     res.status(500).send("Internal server Error");
-  //   }
-  // });
-
   app.put("/api/drug/:id", async (req, res) => {
     const { id } = req.params;
     const { name, brand, price, description, ingredients } = req.body;
