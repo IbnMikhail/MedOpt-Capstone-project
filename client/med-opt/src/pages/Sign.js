@@ -30,7 +30,7 @@ function SignUp() {
       return () => clearTimeout(t1);
     }
 
-    const url = `http://localhost:8000/api/user`;
+    const url = `https://medopt.onrender.com/api/user`;
     const data = { email, password, firstname, lastname, med_history };
 
     try {

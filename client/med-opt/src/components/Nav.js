@@ -33,7 +33,7 @@ function NavBar() {
   const logoutUser = async () => {
     const shouldLogout = window.confirm("Are you sure you want to logout?");
     if(shouldLogout) {
-    const apiUrl = "http://localhost:8000/api/logout";
+    const apiUrl = "https://medopt.onrender.com/api/logout";
     let userId = localStorage.getItem("medOpt");
     try {
       const response = await fetch(apiUrl, {

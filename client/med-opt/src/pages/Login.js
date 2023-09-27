@@ -23,7 +23,7 @@ function Login() {
       return () => clearTimeout(t1);
     }
 
-    const url = `http://localhost:8000/api/login`;
+    const url = `https://medopt.onrender.com/api/login`;
     const data = { email, password };
 
     try {

@@ -10,7 +10,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/user/${id}`);
+        const response = await fetch(`https://medopt.onrender.com/api/user/${id}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -23,7 +23,7 @@ function Profile() {
 
     const fetchUserHistory = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/history/${id}`);
+        const response = await fetch(`https://medopt.onrender.com/api/history/${id}`);
 
         if (!response.ok) {
           throw new Error("Network response was not ok");

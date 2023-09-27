@@ -26,7 +26,7 @@ const DisplayPage = () => {
       return () => clearTimeout(t1);
     }
 
-    const url = `http://localhost:8000/api/history`;
+    const url = `https://medopt.onrender.com/api/history`;
     const data = { search: searchTerm, user_id };
     try {
       const response = await fetch(url, {
