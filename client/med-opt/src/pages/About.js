@@ -37,16 +37,15 @@ function About() {
                         Our Mission
                       </h2>
                       <p className="text-gray-600">
-                        In recent times where patients often face challenges
-                        when it comes to choosing the most suitable and
-                        cost-effective medication options. We provide patients
-                        with medication choices based on affordability and for
-                        better health outcomes. At MedOpt, we are dedicated to
-                        helping you make informed decisions about your
-                        healthcare. Our mission is to provide you with
-                        affordable alternatives to expensive medications,
-                        ensuring you receive the best possible care without
-                        breaking the bank.
+                        In today's healthcare landscape, patients frequently
+                        encounter difficulties in selecting the optimal and
+                        budget-friendly medication. At MedOpt, we offer patients
+                        affordable medication options that align with their
+                        financial capabilities, prioritizing improved health
+                        outcomes. Our commitment is to empower you in making
+                        well-informed healthcare choices. We strive to present
+                        economical alternatives to costly medications, ensuring
+                        top-notch care without overwhelming expenses.
                       </p>
                     </div>
 
