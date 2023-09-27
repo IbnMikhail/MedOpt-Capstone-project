@@ -16,7 +16,7 @@ function Home() {
               <span className="text-#43ce3f bold text-9xl lg:text-9xl pb-8 font-bold">Med</span>
               <span className="text-#3636a4 bold text-9xl lg:text-9xl pb-8 font-bold">Opt</span>
             </div>
-            <div className="absolute left-[25%] bottom-[16%]" >
+            <div className="absolute left-[32%] bottom-[16%]" >
               <p className="text-black font-bold pb-8 text-4xl">
               Your Trusted Medication Advisor
             </p>
