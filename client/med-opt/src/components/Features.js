@@ -9,8 +9,8 @@ const Features = () => {
           <h2 className="text-3xl font-semibold mb-8">Key Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Feature 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-2">Drug Recommendations</h3>
+            <div className="bg-white p-6 rounded-lg shadow-md hover:bg-#43ce3f cursor-pointer">
+              <h3 className="text-xl font-semibold mb-2 hover:text-white">Drug Recommendations</h3>
               <p>Discover affordable and recommendable drugs tailored to your needs.</p>
             </div>
             {/* Feature 2 */}
