@@ -121,8 +121,9 @@ function Profile() {
                   </h3>
                   {history?.map((e, i) => (
                     <div className="w-full bg-gray-100 p-3 m-3">
-                      <h3 className="text-xl font-semibold mb-2">{e.search}</h3>
-                      {e.results.map((j, k) => {
+                      <h3 className="text-xl font-semibold mb-2">Searched: {e.search}</h3>
+                 
+                      <h4 className="text-xl font-semibold mb-2">Results</h4>     {e.results.map((j, k) => {
                         return (
                           <AlternativeDrugs
                             key={k} // Assuming you have a unique key for each item
