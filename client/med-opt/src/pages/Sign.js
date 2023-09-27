@@ -49,11 +49,11 @@ function SignUp() {
           setMsg("");
           setLoading(false);
         }, 3000);
-        setFirstName("")
-        setLastName("")
-        setMedHistory("")
-        setEmail("")
-        setPassword("")
+        setFirstName("");
+        setLastName("");
+        setMedHistory("");
+        setEmail("");
+        setPassword("");
         return () => clearTimeout(t1);
       } else {
         const err = await response.json();

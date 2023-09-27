@@ -11,13 +11,30 @@ let routes = (app) => {
 
   app.post("/api/drug", async (req, res) => {
     const { drugName, brand, price, description, ingredients } = req.body;
-    const drugs =
-      await sql`INSERT INTO drugs (drugName, brand, price, description, ingredients) VALUES 
-          (${drugName}, ${brand}, ${price}, ${description}, ${ingredients}) RETURNING *`;
-    if (drugs) {
-      res.status(200).send(drugs);
+
+    // Check if drugName already exists
+    const existingDrug =
+      await sql`SELECT * FROM drugs WHERE drugName = ${drugName}`;
+
+    if (existingDrug.count > 0) {
+      // Drug with this name already exists
+      res.status(400).send({ message: "Drug with this name already exists" });
     } else {
-      res.status(500).send("Internal server Error");
+      try {
+        const drugs = await sql`
+          INSERT INTO drugs (drugName, brand, price, description, ingredients)
+          VALUES (${drugName}, ${brand}, ${price}, ${description}, ${ingredients})
+          RETURNING *`;
+
+        if (drugs) {
+          res.status(200).send(drugs);
+        } else {
+          res.status(500).send("Internal server Error");
+        }
+      } catch (error) {
+        console.error("Error inserting into database:", error);
+        res.status(500).send("Internal server error.");
+      }
     }
   });
 
