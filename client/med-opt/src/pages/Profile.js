@@ -56,7 +56,7 @@ function Profile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="mb-4 md:mb-0">
                 <img
-                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                  src="https://th.bing.com/th/id/OIP.ncOCV5LVCL8j70Edjgyn6QHaGy?pid=ImgDet&rs=1"
                   alt="Profile"
                   className="w-1/2"
                 />

@@ -74,7 +74,7 @@ function NavBar() {
                 adminStatus? <NavLink link="Admin" to="/add" />: <div style={{display:"none"}}></div>
               }
               <button
-                className="hover:text-black font-extrabold"
+                className="hover:text-black font-extrabold "
                 onClick={() => logoutUser()}
               >
                 Logout
